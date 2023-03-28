@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class MusicCard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
+function MusicCard() {
+  const imputUpdate = () => {
+    const { musicArray: musics, favorited } = props;
+    const favoriteFinder = favorited.some((music) => music.trackId === musics.trackId);
+    return favoriteFinder;
+  };
 
-    };
-  }
-
-imputUpdate = () => {
-  const { musicArray: musics, favorited } = this.props;
-  const favoriteFinder = favorited.some((music) => music.trackId === musics.trackId);
-  return favoriteFinder;
-}
-
-render() {
   // const { musicArray: favorite, loading } = this.state;
   const { musicArray: musics, handleInputChange } = this.props;
   return (
@@ -36,13 +28,12 @@ render() {
           data-testid={ `checkbox-music-${musics.trackId}` }
           type="checkbox"
           value={ musics.trackId }
-          checked={ this.imputUpdate() }
+          checked={ imputUpdate() }
           onChange={ (event) => handleInputChange(event, musics.trackId) }
         />
       </label>
     </>
   );
-}
 }
 
 MusicCard.propTypes = {
