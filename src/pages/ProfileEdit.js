@@ -136,7 +136,7 @@ class ProfileEdit extends React.Component {
               {' '}
 
             </button>
-            { redirect && <Redirect to="/carteira" /> }
+            { redirect && <Redirect to="/profile" /> }
           </>)}
       </>
     );
