@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import Search from './pages/Search';
+import Search from './pages/Search copy';
 import Albums from './pages/Albums';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';

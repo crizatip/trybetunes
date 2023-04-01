@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header';
+import Header from '../Components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
 
@@ -34,7 +34,6 @@ class Search extends React.Component {
       { currentSearch: event.target.value },
       () => {
         this.buttonDisabledHandle();
-        // this.U2handle();
       },
     );
   }
