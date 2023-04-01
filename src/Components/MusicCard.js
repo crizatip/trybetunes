@@ -1,43 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Loading from '../pages/Loading';
-// import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   constructor() {
     super();
     this.state = {
-      // favorite: false,
-      // loading: false,
-      // FavoritesArray: [],
+
     };
   }
-
-  // handleInputChange = (event) => {
-  //   const { musicArray: musics } = this.props;
-  //   const { target } = event;
-  //   const { checked } = target;
-
-  //   if (checked) {
-  //     this.setState({ favorite: true });
-  //     this.favHandle(musics);
-  //   } else {
-  //     this.setState({ favorite: false });
-  //   }
-  //   this.getfavoriteHandle();
-  // }
-
-  // favHandle = async (song) => {
-  //   this.setState({ loading: true });
-  //   await addSong(song);
-  //   this.setState({ loading: false });
-  // }
-
-  // getfavoriteHandle = async () => {
-  //   const getFav = await getFavoriteSongs();
-  //   this.setState({ FavoritesArray: getFav });
-  //   this.imputUpdate();
-  // }
 
 imputUpdate = () => {
   const { musicArray: musics, favorited } = this.props;
