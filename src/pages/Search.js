@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Loading from './Loading';
 
 class Search extends React.Component {
   constructor(props) {
@@ -51,7 +50,7 @@ class Search extends React.Component {
     const { currentSearch, buttonDisabled, result, loading, currentArtist } = this.state;
     return (
       <>
-        {loading && <Loading /> }
+        {loading && <div>carregando</div> }
         <Header />
         <div data-testid="page-search">
           <form id="formSearch" onSubmit={ this.handleSubmit }>

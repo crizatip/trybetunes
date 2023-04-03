@@ -94,7 +94,10 @@ class ProfileEdit extends React.Component {
         {!loading
         && (
           <>
-            <div data-testid="page-profile-edit" />
+            <div
+              className="bg-black"
+              data-testid="page-profile-edit"
+            />
             <form id="formUser" onSubmit={ this.handleSubmit }>
               <input
                 type="text"
@@ -126,6 +129,7 @@ class ProfileEdit extends React.Component {
               />
             </form>
             <button
+              className="bg-secondary"
               type="submit"
               form="formUser"
               data-testid="edit-button-save"
