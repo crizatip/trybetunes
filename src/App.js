@@ -11,7 +11,9 @@ import ProfileEdit from './pages/ProfileEdit';
 class App extends React.Component {
   render() {
     return (
+
       <BrowserRouter>
+
         <Route exact path="/trybetunes">
           <Redirect to="/" />
         </Route>
@@ -25,7 +27,9 @@ class App extends React.Component {
         <Route exact path="/favorites" component={ Favorites } />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/profile/edit" component={ ProfileEdit } />
-      </BrowserRouter>);
+
+      </BrowserRouter>
+    );
   }
 }
 

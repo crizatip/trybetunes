@@ -47,7 +47,7 @@ class Login extends React.Component {
     return (
       <div
         className="flex flex-col justify-center items-center w-screen
-        h-screen bg-[#001822]"
+        h-screen bg-bgColor"
         data-testid="page-login"
       >
         {userCreated && <Redirect to="/search" /> }
