@@ -41,14 +41,15 @@ class Header extends React.Component {
           >
             search
           </Link>
-          <Link
-            className="hover:text-quaternary  mx-4"
+          {/* Em construção */}
+          {/* <Link
+              className="hover:text-quaternary  mx-4"
             exact
             to="/favorites"
             data-testid="link-to-favorites"
           >
             favorites
-          </Link>
+          </Link> */}
           <Link
             className="hover:text-quaternary  mx-4"
             exact
