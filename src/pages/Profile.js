@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from './Header';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
+import UserProfile from '../Components/UserProfile';
 
 class Profile extends React.Component {
   constructor() {
     super();
     this.state = {
-      userData: [],
       loading: false,
     };
   }
@@ -19,28 +18,21 @@ class Profile extends React.Component {
 
   getUserHandle = async () => {
     this.setState({ loading: true });
-    const userInformation = await getUser();
-    this.setState({ userData: userInformation });
+    await getUser();
     this.setState({ loading: false });
   }
 
   render() {
-    const { userData, loading } = this.state;
+    const { loading } = this.state;
     return (
-      <>
-        <div data-testid="page-profile" />
+      <div>
         <Header />
-        { loading && <Loading />}
-        <p>{userData.name}</p>
-        <img
-          data-testid="profile-image"
-          src={ userData.image }
-          alt="Sua Imagem de Perfil"
-        />
-        <p>{userData.email}</p>
-        <p>{userData.description}</p>
-        <Link to="/profile/edit"> Editar perfil </Link>
-      </>
+        <div className="flex m-auto h-screen w-screen justify-center items-center">
+          { loading
+            ? <Loading />
+            : <UserProfile />}
+        </div>
+      </div>
     );
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import MainTitle from '../Components/MainTitle';
 import Loading from './Loading';
 
 class Search extends React.Component {
@@ -51,19 +52,34 @@ class Search extends React.Component {
     const { currentSearch, buttonDisabled, result, loading, currentArtist } = this.state;
     return (
       <>
-        {loading && <Loading /> }
-        <Header />
-        <div data-testid="page-search">
-          <form id="formSearch" onSubmit={ this.handleSubmit }>
-            <input
-              type="text"
-              data-testid="search-artist-input"
-              name="search"
-              id="search"
-              onChange={ this.handleChange }
-              value={ currentSearch }
-            />
+        <div className="fixed w-screen">
+          <Header />
+        </div>
+        <div
+          className=" flex flex-col w-screen
+          h-screen"
+          data-testid="page-search"
+        >
+
+          <div
+            className="flex flex-row items-center
+            justify-center my-auto mx-auto pt-40 pb-20 px-20 flex-wrap w-[600px]"
+          >
+            {loading ? <div className="p-20"><Loading /></div> : <MainTitle />}
+            <form id="formSearch" onSubmit={ this.handleSubmit }>
+              <input
+                className="h-10 w-80 rounded-l-lg border-none p-2 text-sm"
+                type="text"
+                data-testid="search-artist-input"
+                name="search"
+                id="search"
+                onChange={ this.handleChange }
+                value={ currentSearch }
+              />
+            </form>
             <button
+              className="rounded-r-lg bg-secondary text-white hover:bg-gradient-to-r
+               hover:from-secondary hover:to-[#00c9c9] p-2"
               type="submit"
               form="formSearch"
               data-testid="search-artist-button"
@@ -71,24 +87,38 @@ class Search extends React.Component {
             >
               Pesquisar
             </button>
-          </form>
-          <div>
-            <p>
-              {`Resultado de álbuns de: ${currentArtist}` }
-            </p>
-            {result.length === 0 && <p> Nenhum álbum foi encontrado </p>}
+            <div className="text-white mt-5">
+              <p>
+                {`Albuns from:  ${currentArtist}` }
+              </p>
+              {result.length === 0 && <p>Not found</p>}
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center w-[1500px] mx-auto">
             {result.map((results, index) => (
-              <Link
+              <div
+                className=" flex h-60 w-60  rounded-lg
+                m-5 bg-white
+                text-black justify-around items-center
+                hover:scale-95 hover:opacity-90"
                 key={ index }
-                to={ `/album/${results.collectionId}` }
-                data-testid={ `link-to-album-${results.collectionId}` }
               >
-                <br />
-                { results.collectionName }
-                <br />
-                <img src={ results.artworkUrl100 } alt="album" />
-
-              </Link>)) }
+                <Link
+                  to={ `/album/${results.collectionId}` }
+                  data-testid={ `link-to-album-${results.collectionId}` }
+                >
+                  <br />
+                  <img
+                    className="w-30 h-30 mx-auto"
+                    src={ results.artworkUrl100 }
+                    alt="album"
+                  />
+                  <br />
+                  <div className="text-center overflow-hidden mx-auto truncate w-40">
+                    { results.collectionName }
+                  </div>
+                </Link>
+              </div>)) }
           </div>
         </div>
       </>
