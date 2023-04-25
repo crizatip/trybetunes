@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Header from './Header';
 import { getUser, updateUser } from '../services/userAPI';
 import Loading from './Loading';
+import profile from '../public/profile.png';
 
 class ProfileEdit extends React.Component {
   constructor() {
@@ -23,9 +24,8 @@ class ProfileEdit extends React.Component {
 
   buttonTestsDisabled = () => {
     const { names: name, emails: email, descriptions: description } = this.state;
-    const { images: image } = this.state;
     if (
-      name && email && description && image) {
+      name && email && description.length <= Number('50')) {
       this.setState({ disabled: false });
     } else {
       this.setState({ disabled: true });
@@ -89,59 +89,95 @@ class ProfileEdit extends React.Component {
     return (
 
       <>
-        {loading && <Loading /> }
         <Header />
-        {!loading
-        && (
-          <>
-            <div
-              className="bg-black"
-              data-testid="page-profile-edit"
-            />
-            <form id="formUser" onSubmit={ this.handleSubmit }>
-              <input
-                type="text"
-                data-testid="edit-input-name"
-                name="names"
-                value={ name }
-                onChange={ this.onInputChange }
+        <div className="h-screen w-screen">
+          <div className="flex m-auto h-screen w-screen justify-center items-center">
+            {loading && <Loading /> }
+            {!loading
+          && (
+            <>
+              <div>
+                {!image
+                && <img
+                  className="rounded-full h-60 mb-9 mr-9"
+                  src={ profile }
+                  alt="placeholder"
+                />}
+                {image && <img
+                  className="rounded-full h-60 mb-9 mr-9"
+                  src={ image }
+                  alt="your profile"
+                />}
+              </div>
+              <div
+                className="bg-black"
+                data-testid="page-profile-edit"
               />
-              <input
-                type="text"
-                data-testid="edit-input-email"
-                name="emails"
-                value={ email }
-                onChange={ this.onInputChange }
-              />
-              <input
-                type="textarea"
-                data-testid="edit-input-description"
-                name="descriptions"
-                value={ description }
-                onChange={ this.onInputChange }
-              />
-              <input
-                type="text"
-                data-testid="edit-input-image"
-                name="images"
-                value={ image }
-                onChange={ this.onInputChange }
-              />
-            </form>
-            <button
-              className="bg-secondary"
-              type="submit"
-              form="formUser"
-              data-testid="edit-button-save"
-              disabled={ disabled }
-            >
-              {' '}
-              Editar perfil
-              {' '}
-
-            </button>
-            { redirect && <Redirect to="/profile" /> }
-          </>)}
+              <form
+                className="flex flex-col justify-center align-middle"
+                id="formUser"
+                onSubmit={ this.handleSubmit }
+              >
+                {description.length > Number('50')
+                 && <p className="text-[#ff3075] mx-auto mb-5">Too Long description</p>}
+                {!name
+                 && <p className="text-[#ff3075] mx-auto mb-5">Must Have a Username</p>}
+                {!email
+                 && <p className="text-[#ff3075] mx-auto mb-5">Must Have a email</p>}
+                <input
+                  className="h-10 w-80 rounded-full mb-5 border-none p-2 text-sm mx-auto"
+                  type="text"
+                  data-testid="edit-input-name"
+                  name="names"
+                  value={ name }
+                  placeholder="Your username"
+                  onChange={ this.onInputChange }
+                />
+                <input
+                  className="h-10 w-80 rounded-full mb-5 border-none p-2 text-sm mx-auto"
+                  type="text"
+                  data-testid="edit-input-email"
+                  name="emails"
+                  placeholder="Your e-mail"
+                  value={ email }
+                  onChange={ this.onInputChange }
+                />
+                <input
+                  className="h-10 w-80 rounded-full mb-5 border-none p-2 text-sm mx-auto"
+                  type="textarea"
+                  data-testid="edit-input-description"
+                  name="descriptions"
+                  placeholder="Brief description"
+                  value={ description }
+                  onChange={ this.onInputChange }
+                />
+                <input
+                  className="h-10 w-80 rounded-full mb-5 border-none p-2 text-sm mx-auto"
+                  type="text"
+                  data-testid="edit-input-image"
+                  placeholder="Url for your profile picture"
+                  name="images"
+                  value={ image }
+                  onChange={ this.onInputChange }
+                />
+                <button
+                  className="h-10 w-80 rounded-full
+                  mb-5 border-none text-sm bg-secondary hover:bg-gradient-to-r mx-auto
+                  hover:from-secondary hover:to-[#00c9c9] p-2 font-bold text-white"
+                  type="submit"
+                  form="formUser"
+                  data-testid="edit-button-save"
+                  disabled={ disabled }
+                >
+                  {' '}
+                  Edit Profile
+                  {' '}
+                </button>
+                { redirect && <Redirect to="/profile" /> }
+              </form>
+            </>)}
+          </div>
+        </div>
       </>
     );
   }

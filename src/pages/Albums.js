@@ -14,6 +14,8 @@ class Albums extends React.Component {
       musicArray: [],
       artistName: '',
       albumName: '',
+      albumImg: '',
+      relese: '',
       loading: false,
       getFavoritesArray: [],
     };
@@ -22,8 +24,24 @@ class Albums extends React.Component {
   componentDidMount = async () => {
     const { match: { params: { id } } } = this.props;
     const musics = await getMusics(id);
-    this.setState({ musicArray: musics });
+    this.setState({
+      musicArray: musics,
+      artistName: musics[1].artistName,
+      albumName: musics[0].collectionName,
+      albumImg: musics[0].artworkUrl100,
+      relese: musics[0].releaseDate.split('', Number('10')),
+    });
+    this.dateHandle();
     this.getfavoriteHandle();
+  }
+
+  dateHandle = () => {
+    const { relese } = this.state;
+    const date = String(relese).split(',').join('');
+    const formatDate = date.split('-').reverse().join('/');
+    this.setState({
+      relese: formatDate,
+    });
   }
 
   getfavoriteHandle = async () => {
@@ -63,31 +81,70 @@ class Albums extends React.Component {
   }
 
   render() {
-    const { musicArray, artistName, albumName, loading, getFavoritesArray } = this.state;
+    const { musicArray, artistName, albumName, loading, getFavoritesArray,
+      albumImg, relese } = this.state;
+    const load = 'loading...';
+    const h1Style = 'font-bold text-[3em] mb-5';
     return (
       <>
         <Header />
         { loading ? <Loading /> : (
-          <div data-testid="page-album">
-            <div data-testid="artist-name">
-              {!artistName && <p>Artist Name</p> }
-            </div>
-            <div data-testid="album-name">
-              {!albumName && <p>Collection Name</p>}
-            </div>
-            {musicArray.map((musics, index) => (
-              index > 0 && (
-                <div
-                  key={ index }
-                >
-                  <MusicCard
-                    musicArray={ musics }
-                    favorited={ getFavoritesArray }
-                    handleInputChange={ this.handleInputChange }
-                  />
-                </div> /* */)
-            ))}
+          <div
+            className="mt-12 text-white flex flex-col"
+            data-testid="page-album"
+          >
+            <div
+              className="flex flex-row ml-28
+             text-white mb-11"
+            >
 
+              <img
+                className="mr-5  object-fill h-32 w-32"
+                src={ albumImg }
+                alt={ `album ${albumName}` }
+              />
+
+              <div className="my-auto">
+                <div
+                  className=" flex first-letter:m-auto
+                text-xl  font-bold "
+                  data-testid="artist-name"
+                >
+                  {!artistName && <p>{load}</p> }
+                  <h1 className={ h1Style }>{artistName}</h1>
+                </div>
+                <div
+                  className="flex"
+                  data-testid="album-name"
+                >
+                  Album:
+                  {!albumName && <p>{load}</p>}
+                  <h1 className="ml-2">{albumName}</h1>
+                </div>
+                <div
+                  className="flex"
+                  data-testid="album-name"
+                >
+                  Relese date:
+                  {!relese ? <p>{load}</p> : <p className="ml-2">{relese}</p>}
+                </div>
+              </div>
+            </div>
+            <h2 className="font-bold text-[2em] ml-28 mb-5">Music Preview</h2>
+            <div className="m-auto mb-11 flex flex-wrap justify-center">
+              {musicArray.map((musics, index) => (
+                index > 0 && (
+                  <div
+                    key={ index }
+                  >
+                    <MusicCard
+                      musicArray={ musics }
+                      favorited={ getFavoritesArray }
+                      handleInputChange={ this.handleInputChange }
+                    />
+                  </div> /* */)
+              ))}
+            </div>
           </div>)}
       </>
     );

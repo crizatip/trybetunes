@@ -25,28 +25,32 @@ class MainTitle extends React.Component {
 
   render() {
     const { userData, loading } = this.state;
-    const styleProfileContent = `flex flex-col text-bgColor bg-white h-[500px] 
-    w-[500px] p-10 rounded-lg m-auto; justify-center items-center`;
+    const styleProfileContent = `flex flex-col text-bgColor bg-white 
+     p-10 rounded-lg m-auto; justify-center items-center`;
     return (
       <div className={ styleProfileContent } data-testid="page-profile">
+        <div>
+          <p className="font-bold text-[2em]">{userData.name}</p>
+        </div>
         { userData.image ? <img
-          className=" rounded-full h-60"
+          className="rounded-full h-60 m-5"
           src={ userData.image }
           alt="Sua Imagem"
         />
-          : <img className="rounded-full h-60" src={ profile } alt="avatar vazio" /> }
-        { !loading ? <p className="mt-4">{userData.name}</p>
-          : <p className="mt-4">Carregando...</p> }
-        <p className="mt-2">{userData.email}</p>
+          : <img className="rounded-full h-60 m-5" src={ profile } alt="empty" /> }
+        { loading && <p className="mt-4">Carregando...</p> }
+        {!loading && <span className="font-bold">Email: </span>}
+        <p>{userData.email}</p>
         <p
           className="mt-2 overflow-hidden
         mx-auto truncate w-[400px] text-center"
         >
+          {!loading && <span className="font-bold">description: </span>}
+          <br />
           {userData.description}
-
         </p>
         <button
-          className=" mt-2 rounded-lg bg-secondary text-white hover:bg-gradient-to-r
+          className=" mt-5 rounded-lg bg-secondary text-white hover:bg-gradient-to-r
                 hover:from-secondary hover:to-[#00c9c9] p-2"
           type="button"
         >

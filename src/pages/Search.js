@@ -89,9 +89,9 @@ class Search extends React.Component {
             </button>
             <div className="text-white mt-5">
               <p>
-                {`Resultado de álbuns de: ${currentArtist}` }
+                {`Albuns from:  ${currentArtist}` }
               </p>
-              {result.length === 0 && <p> Nenhum álbum foi encontrado </p>}
+              {result.length === 0 && <p>Not found</p>}
             </div>
           </div>
           <div className="flex flex-wrap items-center w-[1500px] mx-auto">

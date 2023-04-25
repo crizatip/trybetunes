@@ -17,18 +17,33 @@ imputUpdate = () => {
 
 render() {
   // const { musicArray: favorite, loading } = this.state;
-  const { musicArray: musics, handleInputChange } = this.props;
+  const { musicArray: musics } = this.props;
   return (
-    <>
-      <li>{ musics.trackName }</li>
-      <audio data-testid="audio-component" src={ musics.previewUrl } controls>
-        <track kind="captions" />
-        O seu navegador não suporta o elemento
-        {' '}
-        {' '}
-        <code>audio</code>
-      </audio>
-      <label
+    <div className=" flex flex-col mb-8 bg-white text-bgColor p-5 rounded-lg mx-8">
+      <p className="overflow-hidden truncate mb-3">
+        { musics.trackName }
+      </p>
+      <div
+        className="flex"
+      >
+        <img
+          src={ musics.artworkUrl60 }
+          alt=""
+        />
+        <audio
+          className="ml-3"
+          data-testid="audio-component"
+          src={ musics.previewUrl }
+          controls
+        >
+          <track kind="captions" />
+          O seu navegador não suporta o elemento
+          {' '}
+          {' '}
+          <code>audio</code>
+        </audio>
+      </div>
+      {/* <label
         htmlFor="favorites"
       >
         Favorita
@@ -39,8 +54,8 @@ render() {
           checked={ this.imputUpdate() }
           onChange={ (event) => handleInputChange(event, musics.trackId) }
         />
-      </label>
-    </>
+      </label> */}
+    </div>
   );
 }
 }

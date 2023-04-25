@@ -9,11 +9,11 @@ class MainTitle extends React.Component {
             className="bg-clip-text text-[transparent]
           bg-gradient-to-r from-[#1dffec] via-[#a5fc19] to-[#13f78c]"
           >
-            Busque
+            Search
             <br />
-            Por
+            For
             <br />
-            Artistas
+            Artists
           </span>
         </h1>
       </div>
