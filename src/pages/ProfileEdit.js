@@ -173,7 +173,7 @@ class ProfileEdit extends React.Component {
                   Edit Profile
                   {' '}
                 </button>
-                { redirect && <Redirect to="/profile" /> }
+                { redirect && <Redirect to="/trybetunes/profile" /> }
               </form>
             </>)}
           </div>

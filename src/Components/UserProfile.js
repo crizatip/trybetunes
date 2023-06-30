@@ -54,7 +54,7 @@ class MainTitle extends React.Component {
                 hover:from-secondary hover:to-[#00c9c9] p-2"
           type="button"
         >
-          <Link to="/profile/edit"> Editar perfil </Link>
+          <Link to="/trybetunes/profile/edit"> Editar perfil </Link>
         </button>
       </div>
     );

@@ -36,7 +36,7 @@ class Header extends React.Component {
           <Link
             className="hover:text-quaternary  mx-4"
             exact
-            to="/search"
+            to="/trybetunes/search"
             data-testid="link-to-search"
           >
             search
@@ -53,7 +53,7 @@ class Header extends React.Component {
           <Link
             className="hover:text-quaternary  mx-4"
             exact
-            to="/profile"
+            to="/trybetunes/profile"
             data-testid="link-to-profile"
           >
             profile

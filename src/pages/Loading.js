@@ -16,16 +16,9 @@ class Loading extends React.Component {
             !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
           >
             Loading...
-
-          </span
-          >
+          </span>
         </div>
-        <span
-          className="font-bold text-xl"
-        >
-          Carregando
-
-        </span>
+        <span className="font-bold text-xl">Carregando</span>
       </div>
     );
   }

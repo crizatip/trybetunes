@@ -50,7 +50,7 @@ class Login extends React.Component {
         h-screen bg-bgColor"
         data-testid="page-login"
       >
-        {userCreated && <Redirect to="/search" /> }
+        {userCreated && <Redirect to="/trybetunes/search" /> }
         {loading && <Loading /> }
         {!loading && (
           <div

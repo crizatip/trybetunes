@@ -104,7 +104,7 @@ class Search extends React.Component {
                 key={ index }
               >
                 <Link
-                  to={ `/album/${results.collectionId}` }
+                  to={ `/trybetunes/album/${results.collectionId}` }
                   data-testid={ `link-to-album-${results.collectionId}` }
                 >
                   <br />
